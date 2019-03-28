@@ -1,0 +1,24 @@
+<div class="container">
+  <table class="table table-bordered table-inverse">
+      <tr>
+        <th>Company Name</th>
+        <th>Job Title</th>
+        <th>Job Type</th>
+        <th class="text-right">Location</th>
+      </tr>
+      <tr *ngFor="let job of jobs">
+        <td>
+          <a [routerLink]="['/joblist/view',job.id]">{{ job.jobCompany.companyName }}</a>
+        </td>
+        <td>
+          {{ job.jobTitle }}
+        </td>
+        <td>
+          {{ job.jobType.jobTypeName }}
+        </td>
+        <td class="text-right">
+          {{ job.location }}
+        </td>
+      </tr>
+    </table>
+  </div>

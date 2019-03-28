@@ -1,0 +1,91 @@
+<!-- method="post" action="/gustbook.html"  -->
+<form [formGroup]="editForm" (ngSubmit)="onUpdate()" novalidate>
+  <div *ngIf="validMessage != ''">
+    <h3 class="has-info">{{ validMessage }}</h3>
+  </div>
+  <fieldset formGroupName="jobCompany">
+    <div class="form-group">
+      <label>Company Name:</label>
+      <input type="text" value="" class="form-control" formControlName="companyName" />
+    </div>
+    <div class="form-group">
+      <label>Contactor Name:</label>
+      <input type="text" value="" class="form-control" formControlName="contactor" />
+    </div>
+    <div class="form-group">
+      <label>Contactor email:</label>
+      <input type="text" value="" class="form-control" formControlName="email" />
+    </div>
+    <div class="form-group">
+      <label>Contactor Phone Number:</label>
+      <input type="text" value="" class="form-control" formControlName="phone" />
+    </div>
+  </fieldset>
+
+  <div class="form-group">
+    <label for="jobTitle">Job Title:</label>
+    <input type="text" value="" class="form-control" formControlName="jobTitle" />
+  </div>
+
+  <fieldset formGroupName="jobType">
+    <div class="form-group">
+      <label>Job Type:</label>
+      <br/>
+      <select class="form-control" formControlName="id" required>
+          <option value="">Please select a job tyoe</option>
+          <option *ngFor="let item of jobTypeList"
+                  [value]="item.id">
+                  {{  item.jobTypeName }}
+          </option>
+      </select>
+    </div>
+  </fieldset>
+
+
+
+
+  <div class="form-group">
+    <label>Job Description:</label>
+    <textarea placeholder="" class="form-control" formControlName="jobDescription"></textarea>
+  </div>
+  <div class="form-group">
+    <label>Requirement:</label>
+    <textarea placeholder="" class="form-control" formControlName="requirement"></textarea>
+  </div>
+  <div class="form-group">
+    <label>Location:</label>
+    <input type="text" value="" class="form-control" id="location" formControlName="location" />
+
+  </div>
+  <div class="form-group">
+    <label>Salary:</label>
+    <input type="text" value="" class="form-control" id="salary" formControlName="salary" />
+  </div>
+
+
+  <button class="btn btn-primary mr-3"
+            style="width:80px;"
+            type="submit"
+            [disabled]="!editForm.valid"> Save
+  </button>
+  <button class="btn btn-outline-secondary mr-3"
+            style="width:80px;"
+            type="button"
+            [routerLink]="['/joblist']">Cancel
+  </button>
+  <button class="btn btn-outline-warning"
+            style="width:80px"
+            type="button"
+            title="Delete this product"
+            (click)="onDelete()"> Delete
+  </button>
+
+
+</form>
+
+
+<!-- <ng-template #loading>
+  Loading job information
+</ng-template> -->
+
+

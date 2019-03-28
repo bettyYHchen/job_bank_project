@@ -1,0 +1,42 @@
+<!-- <nav class='navbar navbar-expand navbar-light bg-light'>
+    <a class='navbar-brand'>{{ pageTitle }}</a>
+    <ul class='nav nav-pills'>
+      <li><a class='nav-link' [routerLink]="['/jobpost']">Post A Job</a></li>
+      <li><a class='nav-link' [routerLink]="['/joblist']">Job List</a></li>
+    </ul>
+  </nav> -->
+
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">{{ pageTitle }}</a>
+
+        <button
+          class="btn btn-primary btn-margin"
+          routerLink="/">
+            Home
+        </button>
+
+        <button
+          class="btn btn-primary btn-margin"
+          routerLink='/jobpost'>
+          Post A Job
+        </button>
+
+        <button
+          class="btn btn-primary btn-margin"
+          routerLink='/joblist'>
+          Job List
+        </button>
+
+
+
+
+      </div>
+    </div>
+  </nav>
+
+
+  <div class='container'>
+    <router-outlet></router-outlet>
+  </div>
