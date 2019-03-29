@@ -12,6 +12,8 @@ import { JoblistComponent } from './components/joblist/joblist.component';
 import { HomeComponent } from './components/home/home.component';
 import { JobDetailsComponent } from './components/job-details/job-details.component';
 import { EditJobpostComponent } from './components/edit-jobpost/edit-jobpost.component';
+import { JobUserLoginComponent } from './components/job-user-login/job-user-login.component';
+import { LoggedInGuardService } from './services/logged-in-guard.service';
 
 
 
@@ -22,7 +24,8 @@ import { EditJobpostComponent } from './components/edit-jobpost/edit-jobpost.com
     JoblistComponent,
     HomeComponent,
     JobDetailsComponent,
-    EditJobpostComponent
+    EditJobpostComponent,
+    JobUserLoginComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +34,7 @@ import { EditJobpostComponent } from './components/edit-jobpost/edit-jobpost.com
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [JobService],
+  providers: [JobService, LoggedInGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,17 +1,19 @@
 package com.busyqa.job_bank.services;
 
-import com.busyqa.job_bank.model.Job;
-import com.busyqa.job_bank.model.JobCompany;
-import com.busyqa.job_bank.model.JobType;
+import com.busyqa.job_bank.model.*;
 import com.busyqa.job_bank.repositories.JobCompanyRepository;
+import com.busyqa.job_bank.repositories.JobPostUserRepository;
 import com.busyqa.job_bank.repositories.JobRepository;
 import com.busyqa.job_bank.repositories.JobTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
+import javax.servlet.http.HttpSession;
+
 
 @Service
 public class JobBankService {
@@ -24,6 +26,14 @@ public class JobBankService {
 
     @Autowired
     private JobRepository jobRepository;
+
+    @Autowired
+    private JobPostUserRepository jobPostUserRepository;
+
+    public JobBankService() {
+    }
+
+
 
     public List<Job> list() {return this.jobRepository.findAll();}
 
@@ -91,6 +101,45 @@ public class JobBankService {
                     jobRepository.deleteById(id);
                     return ResponseEntity.ok().build();
                 }).orElse(ResponseEntity.notFound().build());
+
+    }
+
+    public JobLoginStatus login(JobPostUser jobPostUser, HttpSession session) {
+        JobLoginStatus jobLoginStatus = new JobLoginStatus();
+
+        if (session.getAttribute("id") != null &&
+                session.getAttribute("login") != null &&
+                (boolean) session.getAttribute("login")) {
+            jobLoginStatus.setLogin(true);
+            System.out.println("LOGIN already");
+        } else {
+            System.out.println("not Login yet");
+
+            if (jobPostUserRepository.findFirst1ByUserNameAndPassword(jobPostUser.getUserName(), jobPostUser.getPassword()) != null) {
+                session.setAttribute("id", session.getId());
+                session.setAttribute("login", true);
+                jobLoginStatus.setLogin(true);
+                System.out.println(" LOGIN");
+            } else {
+                session.setAttribute("login", false);
+                jobLoginStatus.setLogin(false);
+                System.out.println(" LOGIN FAIL: username & password not match");
+            }
+
+        }
+
+        return jobLoginStatus;
+    }
+
+    public JobLoginStatus checkLoginSessionStatus(HttpSession session) {
+        JobLoginStatus jobLoginStatus = new JobLoginStatus();
+
+        if (session.getAttribute("id") != null && session.getAttribute("login") != null && (boolean) session.getAttribute("login")) {
+            jobLoginStatus.setLogin(true);
+        } else {
+            jobLoginStatus.setLogin(false);
+        }
+        return jobLoginStatus;
 
     }
 

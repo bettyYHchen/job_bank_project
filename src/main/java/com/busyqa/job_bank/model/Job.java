@@ -1,6 +1,8 @@
 package com.busyqa.job_bank.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -28,9 +30,11 @@ public class Job {
     @JoinColumn(name = "job_company_id", referencedColumnName = "id")
     private JobCompany jobCompany;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
     @JoinColumn(name = "job_type_id", referencedColumnName = "id")
     private JobType jobType;
+
+
 
     public Long getId() {
         return id;

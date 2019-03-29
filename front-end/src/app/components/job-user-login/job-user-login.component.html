@@ -1,0 +1,21 @@
+<form class="form-group" [formGroup]="jobUserLoginForm" (ngSubmit)="onSubmit(jobUserLoginForm)">
+  <h2 class="text-center">Log in</h2>
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Username" required="required" formControlName="userName">
+  </div>
+  <div class="form-group">
+    <input type="password" class="form-control" placeholder="Password" required="required" formControlName="password">
+  </div>
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary btn-block">Log in</button>
+    <button type="button" (click)="logout()" class="btn btn-primary btn-block">Log out</button>
+  </div>
+  <div class="clearfix">
+    <label class="float-left checkbox-inline">
+      <input type="checkbox"> Remember me</label>
+    <a href="#" class="float-right">Forgot Password?</a>
+  </div>
+</form>
+<p class="text-center">
+  <a href="#">Create an Account</a>
+</p>
